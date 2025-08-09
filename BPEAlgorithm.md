@@ -16,7 +16,7 @@ The BPE algorithm is an algorithm
 
 ### 3.1 Python 
 
-- https://github.com/tslime/BPEAlgorithm/tree/main/Python/Tokenmap
+- Token to ID Hashtable, here [Tokenmap]( https://github.com/tslime/BPEAlgorithm/tree/main/Python/Tokenmap)
 
 
 ### 3.2 C++
