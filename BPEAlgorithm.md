@@ -16,7 +16,9 @@ The BPE algorithm is an algorithm
 
 ### 3.1 Python 
 
-### 3.2 Python
+$\bullet$ [[https://github.com/tslime/BPEAlgorithm/tree/main/Python/Tokenmap]]
+
+### 3.2 C++
 
 
 
