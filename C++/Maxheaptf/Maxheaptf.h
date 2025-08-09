@@ -1,3 +1,6 @@
+#ifndef MAXHEAPTF_H
+#define MAXHEAPTF_H
+
 #include "Tokenfreq.h"
 
 #include<stdio.h>
@@ -43,6 +46,10 @@ class Maxheaptf{
                 }
 
                 void add_token(Maxheaptf& h,string left,string right,int f){
+
+                    if(h.num_elements >= h.size)
+                    h.resize_heap(h);
+                
                     Tokenfreq tk = Tokenfreq(left,right);
                     tk.freq = f;
 
@@ -132,7 +139,9 @@ class Maxheaptf{
                 }
 };
 
+#endif
 
+/*
 int main(){
 
     
@@ -173,4 +182,4 @@ int main(){
     
     
     exit(1);
-}
+}*/
