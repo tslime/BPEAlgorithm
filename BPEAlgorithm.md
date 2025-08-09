@@ -16,9 +16,7 @@ The BPE algorithm is an algorithm
 
 ### 3.1 Python 
 
-\begin{itemize}
-\item[$\bullet$]
-\end{itemize}
+- https://github.com/tslime/BPEAlgorithm/tree/main/Python/Tokenmap
 
 
 ### 3.2 C++
