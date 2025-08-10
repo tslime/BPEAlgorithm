@@ -17,10 +17,17 @@ The BPE algorithm is an algorithm
 ### 3.1 Python 
 
 - Token to ID Hashtable, here [Tokenmap]( https://github.com/tslime/BPEAlgorithm/tree/main/Python/Tokenmap)
+- ID to Token "Hashtable" here [IDmap](https://github.com/tslime/BPEAlgorithm/tree/main/Python/IDmap)
+- Priority queue to track frequencies here [Maxheaptf](https://github.com/tslime/BPEAlgorithm/tree/main/Python/Maxheaptf)
 
 
 ### 3.2 C++
 
+## 5. Core Algorithm Code
 
+- The BPE algorithm in Python can be found here [BPE Python](https://github.com/tslime/BPEAlgorithm/blob/main/Python/BPEAlgorithm.py)
+- The BPE algorithm in C++ can be found here [BPE C++]()
+- 
+## 6. Performance Analysis
 
-## 4. Summary \& Conclusion
+## 7. Summary \& Conclusion
