@@ -36,3 +36,10 @@ The BPE algorithm is an algorithm
 ## 6. Performance Analysis
 
 ## 7. Summary \& Conclusion
+
+
+## References
+
+Gage, P. (1994). A New Algorithm for Data Compression.
+
+Sennrich, R., Haddow, B., Birch, A. (2016). Neural Machine Translation of Rare Words with Subword Units.
