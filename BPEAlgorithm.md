@@ -10,6 +10,7 @@ This project provides an implementation of Byte Pair Encoding (BPE) in Python an
 
 The BPE algorithm is an algorithm
 
+Currently, it is used by various LLM models to build a vocabulary. 
 
 ## 3. Core Data Structures
 
