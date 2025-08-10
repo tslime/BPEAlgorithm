@@ -23,9 +23,9 @@ The BPE algorithm is an algorithm
 
 ### 3.2 C++
 
-- Token to ID Hashtable can be found here [Tokenmap C++]( https://github.com/tslime/BPEAlgorithm/tree/main/Python/Tokenmap)
-- ID to Token "Hashtable" can be found here [IDmap C++](https://github.com/tslime/BPEAlgorithm/tree/main/Python/IDmap)
-- Priority queue to track frequencies can be found here [Maxheaptf C++](https://github.com/tslime/BPEAlgorithm/tree/main/Python/Maxheaptf)
+- Token to ID Hashtable can be found here [Tokenmap C++](https://github.com/tslime/BPEAlgorithm/tree/main/C%2B%2B/Tokenmap)
+- ID to Token "Hashtable" can be found here [IDmap C++](https://github.com/tslime/BPEAlgorithm/tree/main/C%2B%2B/IDmap)
+- Priority queue to track frequencies can be found here [Maxheaptf C++](https://github.com/tslime/BPEAlgorithm/tree/main/C%2B%2B/Maxheaptf)
 
 ## 5. Core Algorithm Code
 
