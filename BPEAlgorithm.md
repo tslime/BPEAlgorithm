@@ -8,11 +8,14 @@ This project provides an implementation of Byte Pair Encoding (BPE) in Python an
 
 ## 2. The BPE Algorithm
 
-The BPE algorithm is an algorithm
+The BPE algorithm was developed by Gage (1994) for data compression. It does so by merging a byte pair into one byte. The only rules are that the byte pairs must be adjacent to each other, and they must be the most frequent pair in the data. Once merged, this byte pair is kept in a table data structure so it can be retrieved anytime it is necessary to decode this pair to its original form.  
 
-Currently, it is used by various LLM models to build a vocabulary. 
+Currently, the BPE algorithm is being used for other purposes aside from data compression. Specifically, most LLM models use BPE to construct a concise and 
+from a textual input. 
 
-### 2.1 The tokenization process
+The way the vocabulary is built follows three phases, namely a single tokenization proces, a merge phase, and vocabulary building. I discuss each phase separately below. 
+
+### 2.1 The single tokenization process
 
 ### 2.2 The merge rule
 
