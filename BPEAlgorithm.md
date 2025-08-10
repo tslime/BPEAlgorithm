@@ -12,6 +12,12 @@ The BPE algorithm is an algorithm
 
 Currently, it is used by various LLM models to build a vocabulary. 
 
+### 2.1 The tokenization process
+
+### 2.2 The merge rule
+
+### 2.3 Vocabulary Construction
+
 ## 3. Core Data Structures
 
 The implementation of BPE requires various core data structures. These data structures are necessary because allow us to optimally build a vocabulary, as well as retrieve and store tokens. These data structures with their corresponding are the following:
