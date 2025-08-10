@@ -1,4 +1,4 @@
-# BPE Algorithm
+# BPE Algorithm from Scratch in Python & C++
 
 
 ## 1. Introduction
