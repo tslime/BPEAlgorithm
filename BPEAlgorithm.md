@@ -21,7 +21,9 @@ The way the vocabulary is built follows three phases, namely a single tokenizati
 
 ### 2.3 Vocabulary Construction
 
-## 3. Core Data Structures
+## 3. The Code of BPE Implemetation
+
+### 3.1 Core Data Structures
 
 The implementation of BPE requires various core data structures. These data structures are necessary because allow us to optimally build a vocabulary, as well as retrieve and store tokens. These data structures with their corresponding are the following:
 
@@ -29,28 +31,28 @@ The implementation of BPE requires various core data structures. These data stru
 - ID-Token hashtable:
 - Priority queue or Maxheap: 
 
-### 3.1 Python 
+#### 3.1.1 Python 
 
 - Token to ID Hashtable can be found here [Tokenmap Python]( https://github.com/tslime/BPEAlgorithm/tree/main/Python/Tokenmap)
 - ID to Token "Hashtable" can be found here [IDmap Python](https://github.com/tslime/BPEAlgorithm/tree/main/Python/IDmap)
 - Priority queue to track frequencies can be found here [Maxheaptf Python](https://github.com/tslime/BPEAlgorithm/tree/main/Python/Maxheaptf)
 
 
-### 3.2 C++
+#### 3.1.2 C++
 
 - Token to ID Hashtable can be found here [Tokenmap C++](https://github.com/tslime/BPEAlgorithm/tree/main/C%2B%2B/Tokenmap)
 - ID to Token "Hashtable" can be found here [IDmap C++](https://github.com/tslime/BPEAlgorithm/tree/main/C%2B%2B/IDmap)
 - Priority queue to track frequencies can be found here [Maxheaptf C++](https://github.com/tslime/BPEAlgorithm/tree/main/C%2B%2B/Maxheaptf)
 
-## 5. Core Algorithm Code
+### 3.2 Core Algorithm Code
 
 - The BPE algorithm in Python can be found here [BPE Python](https://github.com/tslime/BPEAlgorithm/blob/main/Python/BPEAlgorithm.py)
 - The BPE algorithm in C++ can be found here [BPE C++]()
 
 
-## 6. Performance Analysis
+## 4. Performance Analysis
 
-## 7. Summary \& Conclusion
+## 5. Summary \& Conclusion
 
 
 ## References
