@@ -8,9 +8,17 @@ This project provides an implementation of Byte Pair Encoding (BPE) in Python an
 
 ## 2. The BPE Algorithm
 
-The BPE algorithm was developed by Gage (1994) for data compression. It does so by merging a byte pair into one byte. The only rules are that the byte pairs must be adjacent to each other, and they must be the most frequent pair in the data. Once merged, this byte pair is kept in a table data structure so it can be retrieved anytime it is necessary to decode this pair to its original form.  
+The BPE algorithm was developed by Gage (1994) for data compression. It does so by merging a byte pair into one byte. The only rules are that the byte pairs must be adjacent to each other, and they must be the most frequent pair in the data. Once merged, this byte pair is kept in a table data structure so it can be retrieved anytime it is necessary to decode this pair to its original form. To illustrate the latter, consider the following data set:
 
-Currently, the BPE algorithm is being used for other purposes aside from data compression. Specifically, most LLM models use BPE to construct a concise and 
+(1) x41 x42 x41 x42
+
+In (1), the most frequent bytes are x41 and x42. Therefore, we can pick up both bytes and represent them with one arbitrary byte, say xF7, in a table with an entry as the following: xF7 -> x41 x42. Accordingly, the new representation of (1) will be as in (2):
+
+(2) xF7 xF7 
+
+The representation in (2) is the compressed representation of (1) since we replaced the frequent pairs with one byte, namely xF7. Therefore, if we want to retrieve the original data we can just check the entry value of xF7 in the table, also known as the merge rule, to retrieve the original data.
+
+Currently, the BPE algorithm is being used for other purposes aside from data compression. Specifically, most LLM models use BPE to construct a concise vocabulary, not comporession, 
 from a textual input. 
 
 The way the vocabulary is built follows three phases, namely a single tokenization proces, a merge phase, and vocabulary building. I discuss each phase separately below. 
