@@ -1,4 +1,4 @@
-# BPEAlgorithm
+# BPE Algorithm
 
 
 ## 1. Introduction
