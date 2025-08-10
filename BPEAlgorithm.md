@@ -16,9 +16,9 @@ Currently, it is used by various LLM models to build a vocabulary.
 
 The implementation of BPE requires various core data structures. These data structures are necessary because allow us to optimally build a vocabulary, as well as retrieve and store tokens. These data structures with their corresponding are the following:
 
--Token-ID hashtable:
--ID-Token hashtable:
--Priority queue or Maxheap: 
+-Item Token-ID hashtable:
+-Item ID-Token hashtable:
+-Item Priority queue or Maxheap: 
 
 ### 3.1 Python 
 
