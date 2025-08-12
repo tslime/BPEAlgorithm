@@ -1,3 +1,7 @@
+#ifndef TOKENMAP_H
+#define TOKENMAP_H
+
+
 #include "Tokennode.h"
 #include "Tokenlinkedlist.h"
 
@@ -30,10 +34,10 @@ class Tokenmap{
                                 if(tm.slots[i].head == nullptr)
                                 cout << "This is slot " << i << " and it is empty \n";
                                 else{
-                                    cout << "This is slot "+ i << " and it contains the following \n";
+                                    cout << "This is slot "<< i << " and it contains the following \n";
                                     Tokennode *aux = tm.slots[i].head;
                                     while(aux != nullptr){
-                                        cout << "Tokend: " << aux->token <<" id: "<< aux->id << " || ";
+                                        cout << "Token: " << aux->token <<" id: "<< aux->id << " || ";
                                         aux = aux->next;
                                     }
                                     cout << "\n";   
@@ -43,27 +47,41 @@ class Tokenmap{
                     }
 
 
-                    int hashcode(Tokenmap& tm,string t){
+                    int hashcode(int map_size,string t){
                         int c = 0;
 
                         int temp = 0;
                         for(int i=0;i<t.length();i++)
                         temp = temp + (t[i] -'0');
                         
-                        c = ((temp << 2)^temp)%tm.size;
+                        c = ((temp << 2)^temp)%map_size;
 
                         return c;
                     }
 
-                    void resize(Tokenmap& tm){
+                    void resize(Tokenmap& tm,int new_size){
+                        Tokenmap temp(2*new_size);
                         
+                        int c = 0;
+                        for(int i=0;i<tm.size;i++){
+                            if(tm.slots[i].head != nullptr){
+                                Tokennode *aux = tm.slots[i].head;
+                                while(aux != nullptr){
+                                    temp.insert_tokenid(temp,aux->token,aux->id);
+                                    aux = aux->next;
+                                }
+                            }
+                        }
+
+                        tm.slots = temp.slots;
+                        tm.size = temp.size;
                     }
 
                     void insert_tokenid(Tokenmap& tm,string t,int num){
                         if(tm.num_elements >= tm.size)
-                        tm.resize(tm);
+                        tm.resize(tm,tm.slots.size());
 
-                        int c = tm.hashcode(tm,t);
+                        int c = tm.hashcode(tm.size,t);
                         Tokennode *n = new Tokennode(t,num);
                         
                         Tokennode *aux = tm.slots[c].head;
@@ -74,12 +92,13 @@ class Tokenmap{
                             aux = aux->next;
                             
                             aux->next = n;
-                            tm.num_elements++;
                         }
+
+                        tm.num_elements++;
                     }
 
                     void remove_idtoken(Tokenmap& tm,string t){
-                            int c = tm.hashcode(tm,t);
+                            int c = tm.hashcode(tm.size,t);
                             Tokennode *aux = tm.slots[c].head;
                             Tokennode *temp = nullptr;
 
@@ -103,7 +122,7 @@ class Tokenmap{
                     }
 
                     Tokennode retrieve_idtoken(Tokenmap& tm,string t){
-                            int c = tm.hashcode(tm,t);
+                            int c = tm.hashcode(tm.size,t);
                             
                             Tokennode *aux = tm.slots[c].head;
                             bool b = false;
@@ -121,10 +140,49 @@ class Tokenmap{
                     }   
 };
 
+#endif
+
+/*
+
 int main(){
 
-    cout << "Test \n";
+    int n;
+    cout << "Give me the size of your token map: \n";
+    cin >> n;
+    Tokenmap tmap(n);
+    
+    cout << "Give me your entries: \n";
+    int i = 0;
+    string tk;
+    int num_id;
+    while(i < 7){
+        cin >> tk;
+        cin >> num_id;
+        tmap.insert_tokenid(tmap,tk,num_id);
+        i++;
+    }
 
+    cout << "size: " << tmap.size << "\n";
+    tmap.print_tokenmap(tmap);
+
+    int y = 1;
+    string tok;
+    while(y){
+        int k = tmap.num_elements;
+        cout << "Would you like to remove an entry 1=yes/0=no \n";
+        cin >> y;
+
+        if(y == 1){
+            cout << "Give me the token you would like to remove \n";
+            cin >> tok;
+            tmap.remove_idtoken(tmap,tok);
+
+            if(tmap.num_elements < k)
+            tmap.print_tokenmap(tmap);
+
+            cout <<"\n";
+        }
+    }
 
     exit(1);
-}
+}*/
