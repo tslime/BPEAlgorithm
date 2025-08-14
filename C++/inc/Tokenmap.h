@@ -77,24 +77,38 @@ class Tokenmap{
                         tm.size = temp.size;
                     }
 
-                    void insert_tokenid(Tokenmap& tm,string t,int num){
+                    int insert_tokenid(Tokenmap& tm,string t,int num){
+                        int r = 0;
+
+                       
+
                         if(tm.num_elements >= tm.size)
                         tm.resize(tm,tm.slots.size());
 
-                        int c = tm.hashcode(tm.size,t);
-                        Tokennode *n = new Tokennode(t,num);
-                        
-                        Tokennode *aux = tm.slots[c].head;
-                        if(aux == nullptr)
-                        tm.slots[c].head = n;
-                        else{
-                            while(aux->next != nullptr)
-                            aux = aux->next;
-                            
-                            aux->next = n;
-                        }
+                        int c = tm.hashcode(tm.size,t);      
 
-                        tm.num_elements++;
+                        Tokennode *aux = tm.slots[c].head;
+                        
+                        if(aux == nullptr){
+                            tm.slots[c].head = new Tokennode(t,num);
+                            tm.num_elements++;
+                            r = 1;
+                        }else{
+                             
+                            bool b = ((aux->token) == t);
+                            while(aux->next != nullptr && !b){
+                                aux = aux->next;
+                                if(aux->token == t)
+                                b = true;
+                            }
+                            
+                            if(!b){
+                                aux->next = new Tokennode(t,num);
+                                tm.num_elements++;
+                                r = 1;
+                            }
+                        }
+                        return r;
                     }
 
                     void remove_idtoken(Tokenmap& tm,string t){
