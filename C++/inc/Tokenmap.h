@@ -77,11 +77,8 @@ class Tokenmap{
                         tm.size = temp.size;
                     }
 
-                    int insert_tokenid(Tokenmap& tm,string t,int num){
-                        int r = 0;
-
-                       
-
+                    void insert_tokenid(Tokenmap& tm,string t,int num){
+                        
                         if(tm.num_elements >= tm.size)
                         tm.resize(tm,tm.slots.size());
 
@@ -92,7 +89,6 @@ class Tokenmap{
                         if(aux == nullptr){
                             tm.slots[c].head = new Tokennode(t,num);
                             tm.num_elements++;
-                            r = 1;
                         }else{
                              
                             bool b = ((aux->token) == t);
@@ -105,10 +101,9 @@ class Tokenmap{
                             if(!b){
                                 aux->next = new Tokennode(t,num);
                                 tm.num_elements++;
-                                r = 1;
                             }
                         }
-                        return r;
+                      
                     }
 
                     void remove_idtoken(Tokenmap& tm,string t){
@@ -135,7 +130,7 @@ class Tokenmap{
                             }else cout << "This token does not exist"; 
                     }
 
-                    Tokennode retrieve_idtoken(Tokenmap& tm,string t){
+                    Tokennode retrieve_tokenid(Tokenmap& tm,string t){
                             int c = tm.hashcode(tm.size,t);
                             
                             Tokennode *aux = tm.slots[c].head;

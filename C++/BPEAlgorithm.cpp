@@ -21,42 +21,48 @@ using std::getline;
 int id_tracker = 0;
 
 
-vector<vector<string>> single_tokenization(string input,Tokenmap& tm,int id){
+vector<vector<string>> single_tokenization(string input,Tokenmap& tm,IDmap& imap,int id){
     vector<string> temp;
     vector<vector<string>> result;
+    Tokennode t("",-1);
     input +="\n";
-    int k = 0;
-
+    bool a = false;
     bool b = false;
-    int i = 0;
-    while(!b){
-         
-        while(input[i] != ' '  && input[i] != '\n'){
-            temp.push_back(string(1,input[i]));
-            
-            k = tm.insert_tokenid(tm,string(1,input[i]),id);
-            cout << "test 1\n";
-            //imap.add_idtoken(imap,*id,string(1,input[i]));
-            
-            if(k == 1)
-            id++;
 
-            i++;
+    int i =0;
+    while(!a){
+        if(input[i] != ' ' && input[i] != '\n'){
+            temp.push_back(string(1,input[i]));
+            t = tm.retrieve_tokenid(tm,string(1,input[i]));
+            if(t.id == -1)
+            {
+                tm.insert_tokenid(tm,string(1,input[i]),id);
+                imap.add_idtoken(imap,id,string(1,input[i]));
+                id++;
+            }
+        }else{
+            
+            temp.push_back("_");
+            result.push_back(temp);
+            temp.clear();
+            if(!b){
+                
+                tm.insert_tokenid(tm,"_",id);
+                imap.add_idtoken(imap,id,"_");
+                id++;
+                b = true;
+            }
         }
 
-        if(input[i] == ' '){
-            i++;
-            if(temp.size() > 0)
-            result.push_back(temp);
+        if(input[i] == '\n')
+        a = true;
 
-            temp.clear();
-        }else{
-            result.push_back(temp);
-            b = true;
-        } 
+        i++;
     }
+
     return result;
 }
+
 
 
 vector<vector<string>> BPEAlgorithm(string input,Tokenmap& tm,IDmap& imap,int id){
@@ -76,10 +82,10 @@ int main(){
     getline(cin,t);
 
 
-    Tokenmap t_map(t.length());
-    //IDmap id_map(t.size());
+    Tokenmap t_map(t.size());
+    IDmap id_map(t.size());
     //Maxheaptf tf(t.size());
-    r = single_tokenization(t,t_map,id_tracker);
+    r = single_tokenization(t,t_map,id_map,id_tracker);
         
     
     cout << "Your single tokenization is:\n";
@@ -91,8 +97,14 @@ int main(){
         cout << "\n";
     }
 
+    cout << "Your token map is: \n";
     t_map.print_tokenmap(t_map);
-    
+    cout << "\n";
+
+    cout << "Your id map is: \n";
+    id_map.print_idmap(id_map);
+
+    cout << "\n";
     exit(1);
 }
 
