@@ -41,12 +41,10 @@ vector<vector<string>> single_tokenization(string input,Tokenmap& tm,IDmap& imap
                 id++;
             }
         }else{
-            
             temp.push_back("_");
             result.push_back(temp);
             temp.clear();
-            if(!b){
-                
+            if(!b){  
                 tm.insert_tokenid(tm,"_",id);
                 imap.add_idtoken(imap,id,"_");
                 id++;

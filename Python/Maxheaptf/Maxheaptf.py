@@ -46,7 +46,9 @@ class Maxheaptf:
         self.slots[self.num_elements].right_string = t_right
         self.slots[self.num_elements].freq = num
         self.num_elements += 1
-        self.bubble_up(self.num_elements-1)
+        ix = self.bubble_up(self.num_elements-1)
+    
+        return ix
 
     def bubble_up(self,token_index):
         b = True
@@ -63,6 +65,8 @@ class Maxheaptf:
                     t = k
                 else:
                     b = False
+        
+        return t
 
 
     def heap_delete(self):
