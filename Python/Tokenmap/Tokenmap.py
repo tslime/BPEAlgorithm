@@ -106,7 +106,7 @@ class Tokenmap:
     def retrieve_token(self,t):
         r = None
 
-        if self.num_tokens > 0:
+        if self.num_tokens > 0 and t != None:
             c = self.hashcode(t)
             aux = self.slots[c].head
             b = False
@@ -121,6 +121,20 @@ class Tokenmap:
                 r = aux
 
         return r
+
+    def update_token(self,t,v):
+        c = self.hashcode(t)
+
+        aux = self.slots[c].head
+        b = False
+        while aux != None and not b:
+            if aux.token == t:
+                b = True
+            else:
+                aux = aux.next
+
+        aux.id = v
+        
 
 
 """
@@ -143,13 +157,11 @@ print()
 while True:
     k = tm.num_tokens
     print()
-    print("Give me the entry that you would like to remove:")
+    print("Give me the entry that you would like to update and the new value:")
     e = input()
-    print("corresponding hash: ",tm.hashcode(e),end="\n") 
-    tm.remove_token(e)
-    if k != tm.num_tokens:
-        tm.printTokenmap()
-    else:
-        print("This entry does not exist \n")
-
+    x = int(input())
+    print()
+    tm.update_token(e,x)
+    tm.printTokenmap()
+    print()
 """
