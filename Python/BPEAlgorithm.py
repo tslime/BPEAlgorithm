@@ -89,24 +89,31 @@ def update_heap(h:Maxheaptf,t_presence_tracker:Tokenmap,t_l:[],t_r:[],token_cand
         if h.slots[l.id].freq != 0:
             h.bubble_down(l.id,t_presence_tracker)
         else:
-            h.slots[l.id] = h.slots[h.num_elements-1]
-            t_presence_tracker.update_token(h.slots[l.id].left_string+h.slots[l.id].right_string,l.id)
-            t_presence_tracker.remove_token(l.token)
-            h.slots[h.num_elements-1] = None
-            h.num_elements -= 1
-            h.bubble_down(l.id,t_presence_tracker)
+            if h.num_elements >= 2:
+                h.slots[l.id] = h.slots[h.num_elements-1]
+                t_presence_tracker.update_token(h.slots[l.id].left_string+h.slots[l.id].right_string,l.id)
+                t_presence_tracker.remove_token(l.token)
+                h.slots[h.num_elements-1] = None
+                h.num_elements -= 1
+                h.bubble_down(l.id,t_presence_tracker)
+            else:
+                h.heap_delete(t_presence_tracker)
     
     if r != None:
         h.slots[r.id].freq -= 1
         if h.slots[r.id].freq != 0:
             h.bubble_down(r.id,t_presence_tracker)
         else:
-            h.slots[r.id] = h.slots[h.num_elements-1]
-            t_presence_tracker.update_token(h.slots[r.id].left_string+h.slots[r.id].right_string,r.id)
-            t_presence_tracker.remove_token(r.token)
-            h.slots[h.num_elements-1] = None
-            h.num_elements -= 1
-            h.bubble_down(r.id,t_presence_tracker)
+            if h.num_elements >= 2:
+                h.slots[r.id] = h.slots[h.num_elements-1]
+                t_presence_tracker.update_token(h.slots[r.id].left_string+h.slots[r.id].right_string,r.id)
+                t_presence_tracker.remove_token(r.token)
+                h.slots[h.num_elements-1] = None
+                h.num_elements -= 1
+                h.bubble_down(r.id,t_presence_tracker)
+            else:
+                h.heap_delete(t_presence_tracker)
+
 
     c_l = t_l[0] + token_candidate
     c_r =  token_candidate + t_r[1] 
@@ -200,9 +207,9 @@ def BPETokenizer(input_text,merge_num,token_map,id_map):
         merge_and_update(token_stream,tf_heap,token_map,id_map,token_presence_tracker)
         print("Pass number ",i,": ",token_stream)
         print()
-        print("heap after pass number: ",i,"\n")
-        tf_heap.printFreq()
-        print()
+       # print("heap after pass number: ",i,"\n")
+        #tf_heap.printFreq()
+        #print()
         i += 1
         merge_num -=1
 
@@ -222,5 +229,5 @@ t_map = Tokenmap(len(t))
 i_map = IDmap(len(t))
 
 
-#BPETokenizer(t,2,t_map,i_map)
+BPETokenizer(t,1,t_map,i_map)
 print()
