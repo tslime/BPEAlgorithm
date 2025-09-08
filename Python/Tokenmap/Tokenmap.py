@@ -62,26 +62,29 @@ class Tokenmap:
         
         self.size = 2*self.size
         self.slots = tempmap.slots
-        self.num_tokens = tempmap.num_tokens
 
     def add_token(self,t,id):
-        if self.num_tokens >= self.size or ((self.num_tokens/self.size)*100) >= 70:
-            self.resize()
+        r_t = self.retrieve_token(t)
+
+        if r_t == None:
+            if self.num_tokens >= self.size or ((self.num_tokens/self.size)*100) >= 70:
+                self.resize()
         
-        temp = Tokennode(t,id)
-        c = self.hashcode(t)
-        aux = self.slots[c].head
-        if aux == None:
-            self.slots[c].head = temp
-        else:
-            while aux.next != None:
-                aux = aux.next
+            temp = Tokennode(t,id)
+            c = self.hashcode(t)
+            aux = self.slots[c].head
+            if aux == None:
+                self.slots[c].head = temp
+            else:
+                while aux.next != None:
+                    aux = aux.next
                 
-            aux.next = temp
+                aux.next = temp
             
-        self.num_tokens += 1
+            self.num_tokens += 1
     
     def remove_token(self,t):
+
         c = self.hashcode(t)
         aux = self.slots[c].head
 
@@ -105,20 +108,19 @@ class Tokenmap:
     
     def retrieve_token(self,t):
         r = None
+ 
+        c = self.hashcode(t)
+        aux = self.slots[c].head
+        b = False
 
-        if self.num_tokens > 0 and t != None:
-            c = self.hashcode(t)
-            aux = self.slots[c].head
-            b = False
-
-            while aux != None and not b:
-                if aux.token == t:
-                    b = True
-                else:
-                    aux = aux.next
+        while aux != None and not b:
+            if aux.token == t:
+                b = True
+            else:
+                aux = aux.next
         
-            if b:
-                r = aux
+        if b:
+            r = aux
 
         return r
 
@@ -133,7 +135,8 @@ class Tokenmap:
             else:
                 aux = aux.next
 
-        aux.id = v
+        if b:
+            aux.id = v
         
 
 
