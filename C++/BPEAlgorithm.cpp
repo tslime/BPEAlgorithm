@@ -33,10 +33,10 @@ vector<vector<string>> single_tokenization(string input,Tokenmap& tm,IDmap& imap
     while(!a){
         if(input[i] != ' ' && input[i] != '\n'){
             temp.push_back(string(1,input[i]));
-            t = tm.retrieve_tokenid(tm,string(1,input[i]));
+            t = tm.retrieve_tokenid(string(1,input[i]));
             if(t.id == -1)
             {
-                tm.insert_tokenid(tm,string(1,input[i]),id);
+                tm.insert_tokenid(string(1,input[i]),id);
                 imap.add_idtoken(imap,id,string(1,input[i]));
                 id++;
             }
@@ -45,7 +45,7 @@ vector<vector<string>> single_tokenization(string input,Tokenmap& tm,IDmap& imap
             result.push_back(temp);
             temp.clear();
             if(!b){  
-                tm.insert_tokenid(tm,"_",id);
+                tm.insert_tokenid("_",id);
                 imap.add_idtoken(imap,id,"_");
                 id++;
                 b = true;
@@ -61,6 +61,17 @@ vector<vector<string>> single_tokenization(string input,Tokenmap& tm,IDmap& imap
     return result;
 }
 
+void populate_heap(Maxheaptf& h,vector<vector<string>> token_stream,Tokenmap& t_presence_tracker){
+
+}
+
+void update_heap(Maxheaptf& h,Tokenmap& t_presence_tracker){
+
+}
+
+void merge_and_update(Maxheaptf& h,vector<vector<string>> token_stream,Tokenmap& t_presence_tracker){
+
+}
 
 
 vector<vector<string>> BPEAlgorithm(string input,Tokenmap& tm,IDmap& imap,int id){
@@ -69,6 +80,8 @@ vector<vector<string>> BPEAlgorithm(string input,Tokenmap& tm,IDmap& imap,int id
 
     return vocab;
 }
+
+
 
 int main(){
 
@@ -85,7 +98,7 @@ int main(){
     //Maxheaptf tf(t.size());
     r = single_tokenization(t,t_map,id_map,id_tracker);
         
-    
+    cout << "\n";
     cout << "Your single tokenization is:\n";
     for(int x=0;x<r.size();x++){
         for(int i=0;i<r[x].size();i++){
@@ -95,12 +108,18 @@ int main(){
         cout << "\n";
     }
 
+
+
+
+    /*
     cout << "Your token map is: \n";
-    t_map.print_tokenmap(t_map);
+    t_map.print_tokenmap();
     cout << "\n";
 
     cout << "Your id map is: \n";
     id_map.print_idmap(id_map);
+    */
+
 
     cout << "\n";
     exit(1);

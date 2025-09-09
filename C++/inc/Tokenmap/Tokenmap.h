@@ -26,16 +26,16 @@ class Tokenmap{
 
                     Tokenmap(int s):slots(s),size(s),num_elements(0){}
 
-                    void print_tokenmap(Tokenmap& tm){
-                        if(tm.num_elements == 0)
+                    void print_tokenmap(){
+                        if(this->num_elements == 0)
                         cout << "The token map is empty \n";
                         else{
-                            for(int i=0;i<tm.size;i++){
-                                if(tm.slots[i].head == nullptr)
+                            for(int i=0;i<this->size;i++){
+                                if(this->slots[i].head == nullptr)
                                 cout << "This is slot " << i << " and it is empty \n";
                                 else{
                                     cout << "This is slot "<< i << " and it contains the following \n";
-                                    Tokennode *aux = tm.slots[i].head;
+                                    Tokennode *aux = this->slots[i].head;
                                     while(aux != nullptr){
                                         cout << "Token: " << aux->token <<" id: "<< aux->id << " || ";
                                         aux = aux->next;
@@ -59,56 +59,56 @@ class Tokenmap{
                         return c;
                     }
 
-                    void resize(Tokenmap& tm,int new_size){
+                    void resize(int new_size){
                         Tokenmap temp(2*new_size);
                         
                         int c = 0;
-                        for(int i=0;i<tm.size;i++){
-                            if(tm.slots[i].head != nullptr){
-                                Tokennode *aux = tm.slots[i].head;
+                        for(int i=0;i<this->size;i++){
+                            if(this->slots[i].head != nullptr){
+                                Tokennode *aux = this->slots[i].head;
                                 while(aux != nullptr){
-                                    temp.insert_tokenid(temp,aux->token,aux->id);
+                                    temp.insert_tokenid(aux->token,aux->id);
                                     aux = aux->next;
                                 }
                             }
                         }
 
-                        tm.slots = temp.slots;
-                        tm.size = temp.size;
+                        this->slots = temp.slots;
+                        this->size = temp.size;
                     }
 
-                    void insert_tokenid(Tokenmap& tm,string t,int num){
+                    void insert_tokenid(string t,int num){
                         
-                        if(tm.num_elements >= tm.size)
-                        tm.resize(tm,tm.slots.size());
+                        Tokennode r = this->retrieve_tokenid(t);
+                        if(r.id == -1){
+                            if(this->num_elements >= this->size)
+                            this->resize(this->slots.size());
 
-                        int c = tm.hashcode(tm.size,t);      
+                            int c = this->hashcode(this->size,t);      
 
-                        Tokennode *aux = tm.slots[c].head;
-                        
-                        if(aux == nullptr){
-                            tm.slots[c].head = new Tokennode(t,num);
-                            tm.num_elements++;
-                        }else{
-                             
-                            bool b = ((aux->token) == t);
-                            while(aux->next != nullptr && !b){
-                                aux = aux->next;
-                                if(aux->token == t)
-                                b = true;
-                            }
+                            if(this->slots[c].head == nullptr){
+                                this->slots[c].head = new Tokennode(t,num);
+                                this->num_elements++;
+                            }else{
+                                Tokennode *aux = this->slots[c].head;
+                                bool b = ((aux->token) == t);
+                                while(aux->next != nullptr && !b){
+                                    aux = aux->next;
+                                    if(aux->token == t)
+                                    b = true;
+                                }
                             
-                            if(!b){
-                                aux->next = new Tokennode(t,num);
-                                tm.num_elements++;
+                                if(!b){
+                                    aux->next = new Tokennode(t,num);
+                                    this->num_elements++;
+                                }
                             }
-                        }
-                      
+                       }
                     }
 
-                    void remove_idtoken(Tokenmap& tm,string t){
-                            int c = tm.hashcode(tm.size,t);
-                            Tokennode *aux = tm.slots[c].head;
+                    void remove_tokenid(string t){
+                            int c = this->hashcode(this->size,t);
+                            Tokennode *aux = this->slots[c].head;
                             Tokennode *temp = nullptr;
 
                             bool b = false;
@@ -123,17 +123,18 @@ class Tokenmap{
 
                             if(b){
                                 if(temp == nullptr)
-                                tm.slots[c].head = tm.slots[c].head->next;
+                                this->slots[c].head = this->slots[c].head->next;
                                 else temp->next = aux->next;
 
-                                tm.num_elements--;
-                            }else cout << "This token does not exist"; 
+                                this->num_elements--;
+                            }
+                            //else cout << "This token does not exist"; 
                     }
 
-                    Tokennode retrieve_tokenid(Tokenmap& tm,string t){
-                            int c = tm.hashcode(tm.size,t);
+                    Tokennode retrieve_tokenid(string t){
+                            int c = this->hashcode(this->size,t);
                             
-                            Tokennode *aux = tm.slots[c].head;
+                            Tokennode *aux = this->slots[c].head;
                             bool b = false;
                             while( aux != nullptr && !b){
                                 if(aux->token == t)
@@ -146,13 +147,28 @@ class Tokenmap{
                             r = Tokennode(aux->token,aux->id);
 
                         return r;
-                    }   
+                    }
+
+                    void update_tokenid(string t,int v){
+                            int c = this->hashcode(this->size,t);
+
+                            Tokennode *aux = this->slots[c].head;
+                            bool b = false;
+
+                            while(aux != nullptr && !b){
+                                if(aux->token == t)
+                                b = true;
+                                else aux = aux->next;
+                            }
+
+                            if(b)
+                            aux->id = v;
+                    }
 };
 
 #endif
 
 /*
-
 int main(){
 
     int n;
@@ -167,31 +183,36 @@ int main(){
     while(i < 7){
         cin >> tk;
         cin >> num_id;
-        tmap.insert_tokenid(tmap,tk,num_id);
+        tmap.insert_tokenid(tk,num_id);
         i++;
     }
 
-    cout << "size: " << tmap.size << "\n";
-    tmap.print_tokenmap(tmap);
+    cout <<"\n";
+    tmap.print_tokenmap();
+    cout << "\n";
 
+    
     int y = 1;
+    int v;
     string tok;
     while(y){
         int k = tmap.num_elements;
-        cout << "Would you like to remove an entry 1=yes/0=no \n";
+        cout << "Would you like to update an entry 1=yes/0=no \n";
         cin >> y;
 
         if(y == 1){
-            cout << "Give me the token you would like to remove \n";
+            cout << "Give me the token you would like to update and its new value \n";
             cin >> tok;
-            tmap.remove_idtoken(tmap,tok);
+            cin >> v;
+            tmap.update_tokenid(tok,v);
 
-            if(tmap.num_elements < k)
-            tmap.print_tokenmap(tmap);
+            cout << "\n";
+            tmap.print_tokenmap();
 
             cout <<"\n";
         }
     }
 
     exit(1);
-}*/
+}
+*/
