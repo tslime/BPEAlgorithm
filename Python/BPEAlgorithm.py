@@ -223,11 +223,11 @@ def BPETokenizer(input_text,merge_num,token_map,id_map):
 
 
 
-print("give me a text \n")
-t = input()
-t_map = Tokenmap(len(t))
-i_map = IDmap(len(t))
+if __name__ == "__main__":
+    print("give me a text \n")
+    t = input()
+    t_map = Tokenmap(len(t))
+    i_map = IDmap(len(t))
 
-
-BPETokenizer(t,1,t_map,i_map)
-print()
+    BPETokenizer(t,1,t_map,i_map)
+    print()

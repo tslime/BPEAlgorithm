@@ -62,6 +62,25 @@ class IDmap:
             return self.slots[num]
         else:
             return None
+    
+    def display_vocabulary(self):
+        """Display the complete vocabulary in a formatted way."""
+        if self.num_ids == 0:
+            print("No tokens in vocabulary")
+            return
+        
+        print("Vocabulary (ID -> Token):")
+        for i in range(self.size):
+            if self.slots[i].id is not None:
+                token = self.slots[i].token
+                # Format token display (show spaces as visible characters)
+                display_token = token.replace('_', '<SPACE>')
+                print(f"  {self.slots[i].id:2d}: '{display_token}'")
+        print(f"Total vocabulary size: {self.num_ids}")
+        
+    def get_vocabulary_size(self):
+        """Return the current vocabulary size."""
+        return self.num_ids
 
 
 

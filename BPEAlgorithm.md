@@ -23,11 +23,45 @@ from a textual input.
 
 The way the vocabulary is built follows three phases, namely a single tokenization proces, a merge phase, and vocabulary building. I discuss each phase separately below. 
 
-### 2.1 The single tokenization process
+### 2.1 The Single Tokenization Process
 
-### 2.2 The merge rule
+The single tokenization process is the initial step where the input text is broken down into individual characters. Each unique character encountered is assigned a unique identifier and stored in both a Token-ID hash table and an ID-Token hash table. This creates the foundation vocabulary from which the algorithm will build more complex tokens.
+
+During this phase:
+1. The input text is processed character by character
+2. Spaces and newlines are converted to special tokens (represented as "_")
+3. Each unique character gets assigned a sequential ID starting from 0
+4. The character-ID mappings are stored in bidirectional hash tables
+
+### 2.2 The Merge Rule
+
+The merge rule defines how token pairs are combined during the BPE process. The algorithm follows these steps:
+
+1. **Frequency Calculation**: Count the frequency of all adjacent token pairs in the tokenized text
+2. **Priority Selection**: Select the most frequent token pair for merging
+3. **Token Creation**: Create a new token representing the merged pair
+4. **Vocabulary Update**: Add the new token to the vocabulary with a new unique ID
+5. **Text Update**: Replace all occurrences of the selected pair with the new token
+6. **Frequency Recalculation**: Update frequency counts for affected pairs
+
+This process continues iteratively until either:
+- No more pairs exist with frequency > 1
+- A predetermined number of merge operations is reached
+- A target vocabulary size is achieved
 
 ### 2.3 Vocabulary Construction
+
+The vocabulary construction phase builds the final set of tokens that can be used for encoding and decoding text. The vocabulary consists of:
+
+1. **Base Characters**: All unique characters from the original text
+2. **Merged Tokens**: All token pairs created during the merge operations
+3. **Special Tokens**: Space representations and other special symbols
+
+The final vocabulary serves multiple purposes:
+- **Encoding**: Convert raw text into a sequence of token IDs
+- **Decoding**: Convert token ID sequences back to readable text
+- **Compression**: Achieve efficient text representation with frequent substrings encoded as single tokens
+- **Language Modeling**: Provide a compact vocabulary for neural language models
 
 ## 3. The Code of BPE Implemetation
 
@@ -59,6 +93,56 @@ The implementation of BPE requires various core data structures. These data stru
 
 
 ## 4. Performance Analysis
+
+This section provides a comparative analysis of the Python and C++ implementations of the BPE algorithm across different metrics.
+
+### 4.1 Time Complexity
+
+The BPE algorithm has the following time complexities:
+
+- **Single Tokenization**: O(n) where n is the length of input text
+- **Initial Frequency Calculation**: O(n) for scanning all adjacent pairs
+- **Each Merge Operation**: O(m + k) where m is the number of pair occurrences and k is the vocabulary size
+- **Overall Complexity**: O(v × (m + k)) where v is the number of merges performed
+
+### 4.2 Space Complexity
+
+- **Hash Tables**: O(v) for storing vocabulary mappings
+- **Priority Queue**: O(p) where p is the number of unique pairs
+- **Token Streams**: O(n) for storing tokenized text
+- **Overall Space**: O(n + v + p)
+
+### 4.3 Language-Specific Performance
+
+#### Python Implementation
+- **Advantages**: Rapid prototyping, readable code, extensive libraries
+- **Considerations**: Dynamic typing overhead, interpreted execution
+- **Memory Usage**: Higher due to object overhead and dynamic structures
+- **Development Speed**: Faster iteration and debugging
+
+#### C++ Implementation  
+- **Advantages**: Compiled performance, manual memory management, lower overhead
+- **Considerations**: Longer development time, more complex memory management
+- **Memory Usage**: More efficient with direct memory control
+- **Execution Speed**: Significantly faster for large datasets
+
+### 4.4 Scalability Analysis
+
+The implementation scales effectively for different use cases:
+
+- **Small Text**: Both implementations perform adequately
+- **Medium Text (1K-10K chars)**: C++ shows noticeable performance advantage
+- **Large Text (>10K chars)**: C++ implementation significantly outperforms Python
+- **Memory Constrained Environments**: C++ implementation uses less memory
+
+### 4.5 Real-World Applications
+
+Performance characteristics make this implementation suitable for:
+
+- **Educational Purposes**: Clear algorithm demonstration
+- **Prototype Development**: Fast iteration with Python version
+- **Production Systems**: Optimized C++ version for large-scale processing
+- **Research**: Baseline implementation for algorithm variations
 
 ## 5. Summary \& Conclusion
 
