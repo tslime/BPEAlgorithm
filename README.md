@@ -50,11 +50,33 @@ python3 BPEAlgorithm.py
 ```bash
 # Compile the program
 cd C++
-g++ -I./inc -o bpe_algorithm BPEAlgorithm.cpp
+make
 
 # Run the algorithm
 ./bpe_algorithm
 ```
+
+## 🎮 Interactive Demo
+
+Try the interactive demonstration with pre-configured examples:
+
+```bash
+cd Python
+python3 demo.py
+```
+
+This will walk you through several examples showing how BPE learns to merge frequent character pairs.
+
+## 📈 Performance Benchmarking
+
+Run comprehensive performance analysis:
+
+```bash
+cd Python  
+python3 benchmark.py
+```
+
+Sample results show processing speeds of 165,000+ characters per second with efficient memory usage.
 
 ## 📖 Usage Example
 
@@ -68,13 +90,24 @@ text = "hello world hello"
 # 3. Merge: [['he','l','l','o','_'], ['w','o','r','l','d','_'], ['he','l','l','o','_']]
 ```
 
+## 📚 Documentation
+
+For comprehensive information about this project:
+
+- **[Usage Guide](USAGE_GUIDE.md)** - Quick start and usage instructions
+- **[Algorithm Documentation](BPEAlgorithm.md)** - Detailed technical explanation
+- **[Project Showcase](PROJECT_SHOWCASE.md)** - Technical achievements and professional summary
+- **[Sample Outputs](examples/sample_outputs.md)** - Example runs and performance analysis
+
 ## 📊 Performance Analysis
 
 The implementation includes performance comparison between Python and C++ versions:
 
 - **Memory Usage**: Custom data structures vs. built-in collections
-- **Processing Speed**: Language-specific optimizations
+- **Processing Speed**: Language-specific optimizations  
 - **Scalability**: Performance with different text sizes
+
+Run `python3 Python/benchmark.py` for comprehensive performance testing.
 
 ## 📚 Documentation
 
