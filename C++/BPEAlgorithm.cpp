@@ -4,6 +4,7 @@
 #include "IDmap.h"
 #include "IDnode.h"
 #include "Maxheaptf.h"
+#include "Tokenfreq.h"
 
 #include<iostream>
 #include<malloc.h>
@@ -62,15 +63,38 @@ vector<vector<string>> single_tokenization(string input,Tokenmap& tm,IDmap& imap
 }
 
 void populate_heap(Maxheaptf& h,vector<vector<string>> token_stream,Tokenmap& t_presence_tracker){
+        int i = 0;
+        int j;
+        Tokennode retrieved_t("",-1);
+
+        while(i < token_stream.size()){
+            j = 0;
+            bool b = false;
+            while(!b){
+                if(j+1 >= token_stream[i].size() || token_stream[i][j+1] == "_")
+                b = true;
+                else{
+                    retrieved_t = t_presence_tracker.retrieve_tokenid(token_stream[i][j]+token_stream[i][j+1]);
+                    
+                    if(retrieved_t.id == -1)
+                    h.add_token(token_stream[i][j],token_stream[i][j+1],1,t_presence_tracker);
+                    else{
+                        h.slots[retrieved_t.id].freq++;
+                        h.bubbleUp(retrieved_t.id,t_presence_tracker);
+                    }
+                    j++;
+                }
+            }
+            i++;
+        }
+}
+
+void update_heap(Maxheaptf& h,vector<string> l,vector<string> r,Tokenmap& t_presence_tracker){
 
 }
 
-void update_heap(Maxheaptf& h,Tokenmap& t_presence_tracker){
-
-}
-
-void merge_and_update(Maxheaptf& h,vector<vector<string>> token_stream,Tokenmap& t_presence_tracker){
-
+void merge_and_update(string candidate,Maxheaptf& h,vector<vector<string>> token_stream,Tokenmap& t_presence_tracker){
+        
 }
 
 
@@ -95,7 +119,7 @@ int main(){
 
     Tokenmap t_map(t.size());
     IDmap id_map(t.size());
-    //Maxheaptf tf(t.size());
+    Maxheaptf tf(t.size());
     r = single_tokenization(t,t_map,id_map,id_tracker);
         
     cout << "\n";
@@ -108,7 +132,12 @@ int main(){
         cout << "\n";
     }
 
-
+    cout << "\n";
+    cout << "Your populated heap is: \n";
+    populate_heap(tf,r,t_map);
+    cout << "\n";
+    tf.printMaxheaptf();
+    cout << "\n";
 
 
     /*
