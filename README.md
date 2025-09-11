@@ -2,7 +2,7 @@
 
 
 
-## 🔄 BPE Implementation Performance Comparison: C++ vs Python
+## BPE Implementation Performance Comparison: C++ vs Python
 
 | Aspect                        | C++ Implementation                       | Python Implementation                    |
 |------------------------------|------------------------------------------|------------------------------------------|
