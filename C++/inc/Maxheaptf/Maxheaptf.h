@@ -90,7 +90,7 @@ class Maxheaptf{
                         token_presence.remove_tokenid(r.left_string+r.right_string);
                         token_presence.update_tokenid(this->slots[0].left_string+this->slots[0].right_string,0);
                         this->num_elements--;
-                        this->bubbleDown(token_presence);
+                        this->bubbleDown(0,token_presence);
                     }else{
                         r = this->slots[0];
                         token_presence.remove_tokenid(r.left_string+r.right_string);
@@ -101,8 +101,8 @@ class Maxheaptf{
                     return r;
                 }
 
-                void bubbleDown(Tokenmap& token_presence){
-                    int x = 0;
+                void bubbleDown(int index,Tokenmap& token_presence){
+                    int x = index;
                     bool b = true;
                     int left_child;
                     int right_child;

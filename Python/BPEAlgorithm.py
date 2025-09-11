@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 
 from Tokenmap.Tokenmap import Tokenmap
 from Tokenmap.Tokenlinkedlist import Tokenlinkedlist
@@ -206,10 +207,8 @@ def BPETokenizer(input_text,merge_num,token_map,id_map):
     while tf_heap.num_elements > 0 and merge_num > 0:
         merge_and_update(token_stream,tf_heap,token_map,id_map,token_presence_tracker)
         print("Pass number ",i,": ",token_stream)
-        print()
-       # print("heap after pass number: ",i,"\n")
         #tf_heap.printFreq()
-        #print()
+        print()
         i += 1
         merge_num -=1
 
@@ -229,5 +228,9 @@ t_map = Tokenmap(len(t))
 i_map = IDmap(len(t))
 
 
-BPETokenizer(t,1,t_map,i_map)
-print()
+start = time.time()
+BPETokenizer(t,8,t_map,i_map)
+end = time.time()
+
+print("Elapsed time: ",(end-start)*1000,"ms")
+
