@@ -1,10 +1,14 @@
-## Byte Pair Encoding (BPE) Algorithm - Project Overview
+## Byte Pair Encoding (BPE) Algorithm - Detailed Overview
 
-Welcome to the **BPEAlgorithm** project! This repository features a sophisticated implementation of the Byte Pair Encoding (BPE) compression algorithm in both C++ and Python. The BPE algorithm is widely used for text compression and tokenization in natural language processing (NLP), especially within subword segmentation tasks.
+The BPEAlgorithm repository contains an advanced implementation of the Byte Pair Encoding (BPE) algorithm from scratch. This project rigorously develops both C++ and Python implementations of the BPE algorithm, aiming to explore its performance and memory management characteristics when applied in these two diverse programming environments. The BPE algorithm is commonly used in compression and subword tokenization tasks, playing a pivotal role in modern natural language processing (NLP) workflows.
 
-Key Highlights:
-- Entirely original implementation: This project is designed from the ground up without relying on naive or pre-existing library-based solutions. Every component, from token maps to heap structures, has been implemented manually to ensure high performance and adaptability.
-- Focus on performance and practicality: The project compares the efficiency, flexibility, and usability of the BPE algorithm in two distinct programming languages: C++ and Python. Each language's strengths and limitations have been explored in depth.
+Through systematic development, the goal has been to create original implementations that avoid naive approaches or dependencies on third-party libraries where possible. Data structures such as heaps and hashmaps have been custom-built to suit the specific performance needs of this project. This repository serves as a practical ground for algorithm comparison and evaluation, contributing meaningful insights to both algorithm enthusiasts and developers alike.
+
+### Why This Implementation Is Unique
+
+1. **Built From Scratch**: Every component, from token maps to heap structures, has been designed manually without relying on external libraries or naive implementations. The result is an insightful deep dive into BPE’s core mechanisms.
+2. **Cross-Language Comparison**: By implementing BPE in both C++ and Python, this project helps analyze the trade-offs between execution speed, memory management capabilities, and development flexibility.
+3. **Targeting Performance and Practicality**: The focus is not only on maximizing the raw speed of the algorithm but also on ensuring that it remains reusable and aligned with the requirements of practical software development.
 
 ## BPE Implementation Performance Comparison: C++ vs Python
 
@@ -25,8 +29,16 @@ Key Highlights:
 | Reusability                  | Suitable for compiled tools / CLI usage  | Ideal for prototyping / notebooks        |
 | Portability                  | Requires compilation                     | Run anywhere with Python installed       |
 
-## Conclusion:
+## Conclusion
 
-The C++ implementation considerably outpaces the Python version in raw execution speed (~2.7× faster), attributed to meticulous manual memory handling and optimized data structures. Meanwhile, Python offers unparalleled flexibility and is more suited for rapid prototyping and experimentation.
+The C++ implementation proves to be significantly faster than its Python counterpart, offering a speed advantage of approximately **2.7×**. This enhanced performance stems from low-level, manual memory management optimized for high-speed operations. In contrast, Python exhibits its strengths in flexibility, ease of prototyping, and a high level of abstraction.
 
-With this project, you get the best of both worlds: the high performance of C++ and the ease and readability of Python. This implementation serves as a practical example to compare the trade-offs between these languages for algorithms requiring efficiency and customization.
+### Strengths of the C++ Implementation
+- **Execution Speed**: The implementation in C++ leverages custom data structures (e.g., `MaxHeapTF`) and rigorous control over memory allocation, providing optimized performance for compute-intensive workflows.
+- **Fine-Grained Control**: By using a custom-built hashmap and manual resizing techniques, the C++ implementation ensures minimal memory overhead while handling tasks with precision.
+
+### Strengths of the Python Implementation
+- **Ease of Use**: Python’s high-level language features allow for quick development cycles and rapid testing of the algorithm.
+- **Portability and Readability**: Python’s flexibility makes it highly compatible for use in exploratory settings or integration into broader software pipelines.
+
+Both implementations provide valuable insights into the algorithm's characteristics and how low-level optimizations impact execution efficiency, while high-level abstractions contribute to prototyping ease. These implementations showcase the versatility of BPE and how its performance varies across major programming paradigms.
