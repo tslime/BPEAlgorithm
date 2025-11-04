@@ -1,6 +1,10 @@
+## Byte Pair Encoding (BPE) Algorithm - Project Overview
 
+Welcome to the **BPEAlgorithm** project! This repository features a sophisticated implementation of the Byte Pair Encoding (BPE) compression algorithm in both C++ and Python. The BPE algorithm is widely used for text compression and tokenization in natural language processing (NLP), especially within subword segmentation tasks.
 
-
+Key Highlights:
+- Entirely original implementation: This project is designed from the ground up without relying on naive or pre-existing library-based solutions. Every component, from token maps to heap structures, has been implemented manually to ensure high performance and adaptability.
+- Focus on performance and practicality: The project compares the efficiency, flexibility, and usability of the BPE algorithm in two distinct programming languages: C++ and Python. Each language's strengths and limitations have been explored in depth.
 
 ## BPE Implementation Performance Comparison: C++ vs Python
 
@@ -21,7 +25,8 @@
 | Reusability                  | Suitable for compiled tools / CLI usage  | Ideal for prototyping / notebooks        |
 | Portability                  | Requires compilation                     | Run anywhere with Python installed       |
 
+## Conclusion:
 
-# Conclusion:
+The C++ implementation considerably outpaces the Python version in raw execution speed (~2.7× faster), attributed to meticulous manual memory handling and optimized data structures. Meanwhile, Python offers unparalleled flexibility and is more suited for rapid prototyping and experimentation.
 
-The C++ version significantly outperforms Python in raw execution time (~2.7× faster), thanks to manual memory management and a custom heap/token map. However, Python remains advantageous for rapid development, experimentation, and integration in data pipelines.
+With this project, you get the best of both worlds: the high performance of C++ and the ease and readability of Python. This implementation serves as a practical example to compare the trade-offs between these languages for algorithms requiring efficiency and customization.
